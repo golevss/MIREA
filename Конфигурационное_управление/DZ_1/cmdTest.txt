@@ -1,0 +1,15 @@
+ls
+cd /root/Right
+ls 
+cd ./Test
+pwd
+ls
+cat main.txt
+cd ..
+pwd
+date
+cd ~
+ls /Left
+cat /Right/main.py
+cat /Left/xd.txt
+exit
