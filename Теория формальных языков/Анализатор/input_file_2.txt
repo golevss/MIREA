@@ -1,0 +1,8 @@
+program
+var
+	int a, b
+begin
+	a := 1.5e+15 + b;
+	a := b + a;
+	readln a, m + 15, a, b
+end

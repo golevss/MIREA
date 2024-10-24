@@ -1,0 +1,22 @@
+program var 
+	int a, b, alpha, beta
+begin
+	b := 77d;
+	readln alpha, beta;
+	for a := 0d to b + 2d step 10b + 36o
+	begin
+		if (alpha >= 12D)
+		begin
+			beta := .5e+12;
+			beta := alpha + beta
+		end
+		else
+			alpha := 50e+12
+	end
+	next {Комментарий}
+	while (true)
+		for a := 0d to b + 2d
+			a := a + 2d
+		next
+	writeln beta + alpha * b / a;
+end

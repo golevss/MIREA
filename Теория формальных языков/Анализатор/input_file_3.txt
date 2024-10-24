@@ -1,0 +1,10 @@
+program
+var
+	int a, b
+begin
+	a := 1.5e+15 + b;
+	for b := 5 a+15
+	begin
+		b := 25
+	end
+end

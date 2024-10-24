@@ -1,0 +1,10 @@
+program var 
+	int alpha, beta
+begin
+	{Комментарий}
+	while (true)
+		for alpha := alpha + 1d to beta + 77O step 13d
+			alpha := alpha + beta
+		next
+	writeln beta + alpha * beta / alpha;
+end

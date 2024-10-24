@@ -1,0 +1,8 @@
+program
+var
+	int a, b
+begin
+	while (a + b)
+		a := b + a;
+	writeln a, b
+end
