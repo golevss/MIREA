@@ -91,9 +91,6 @@ def format_dependencies_to_nested_dicts(main_package, dependencies, visited=None
 
     return formatted_dependencies
 
-
-
-
 def convertDicts(nested_dicts, depth, i):
     GraphCode = ""
 
