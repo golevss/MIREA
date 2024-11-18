@@ -17,7 +17,8 @@ def get_dependencies_git(package_url):
     response = requests.get(package_url)
     dependencies = set()
     for line in response.text.splitlines():
-        if line[0] != '-':
+        line = line.strip()
+        if line and line[0] != '-':
             dependencies.add(line)
     return dependencies
     
