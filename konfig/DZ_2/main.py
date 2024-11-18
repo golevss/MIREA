@@ -1,8 +1,7 @@
 import requests
 import graphviz
-import json
 import argparse
-from urllib.parse import urlparse
+import re
 
 def get_dependencies(package_name):
     response = requests.get(f'https://pypi.org/pypi/{package_name}/json').json()
@@ -14,15 +13,20 @@ def convertDicts(pack_name, dicts, depth, i):
     GraphCode = ""
     visited = set()
     for pack in dicts:
-        name_pack = pack.split('>')[0]
-        if name_pack in visited:
+        match = re.match(r'^[a-zA-Z0-9_-]+',pack)
+        if match:
+            name_pack = pack[:match.end()]
+        else:
+            name_pack = pack
+        
+        if name_pack in visited or name_pack == "":
             pass
         else:
-            GraphCode += f"\"{pack_name}\"->\"{name_pack}\"\n"
-            visited.add(name_pack)
+            if re.match(r'^[a-zA-Z0-9_-]+',name_pack):
+                GraphCode += f"\"{pack_name}\"->\"{name_pack}\"\n"
+                visited.add(name_pack)
         
         if i < depth:
-            print(name_pack)
             dependency_tree = get_dependencies(name_pack)
             links = convertDicts(name_pack,dependency_tree, depth-i, 1)
             GraphCode += links
