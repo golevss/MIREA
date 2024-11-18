@@ -49,12 +49,9 @@ def main():
     depth = int(args.depth)
 
     dependencies = get_dependencies(package_name)
-    for pack in dependencies:
-        print (pack.split('>')[0])
 
     links = convertDicts(package_name,dependencies, depth, 1)
     graph_code = "digraph G {\n" + links + "}"
-    print(graph_code)
     render_graph(graph_code, output)
 
 if __name__ == '__main__':
