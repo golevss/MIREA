@@ -1,8 +1,5 @@
 import unittest
 from unittest.mock import patch, MagicMock
-import graphviz
-import requests
-import re
 
 from main import get_dependencies, get_dependencies_git, convertDicts, render_graph
 
