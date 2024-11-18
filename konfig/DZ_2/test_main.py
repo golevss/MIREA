@@ -10,7 +10,6 @@ class TestPackageDependencies(unittest.TestCase):
 
     @patch('requests.get')
     def test_get_dependencies(self, mock_get):
-        # Mock the response from the PyPI API
         mock_response = MagicMock()
         mock_response.json.return_value = {
             "info": {
@@ -27,7 +26,6 @@ class TestPackageDependencies(unittest.TestCase):
 
     @patch('requests.get')
     def test_get_dependencies_no_requires_dist(self, mock_get):
-        # Mock response without 'requires_dist'
         mock_response = MagicMock()
         mock_response.json.return_value = {
             "info": {}
@@ -42,7 +40,6 @@ class TestPackageDependencies(unittest.TestCase):
 
     @patch('requests.get')
     def test_get_dependencies_git(self, mock_get):
-        # Mock the response from a Git-based URL
         mock_response = MagicMock()
         mock_response.text = """
         numpy
@@ -58,7 +55,6 @@ class TestPackageDependencies(unittest.TestCase):
         mock_get.assert_called_once_with(package_url)
 
     def test_convertDicts(self):
-        # Test convertDicts function
         dependencies = ['numpy', 'requests']
         package_name = "example_package"
         depth = 2
@@ -69,7 +65,6 @@ class TestPackageDependencies(unittest.TestCase):
     
     @patch('graphviz.Source.render')
     def test_render_graph(self, mock_render):
-        # Test render_graph function
         dot_code = 'digraph G { "A"->"B"; }'
         output_file = 'output_graph'
         
