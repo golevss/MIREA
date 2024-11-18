@@ -5,14 +5,23 @@ import re
 
 def get_dependencies(package_name):
     response = requests.get(f'https://pypi.org/pypi/{package_name}/json').json()
-    dependencies = response.get("info", {})["requires_dist"]
+    if "requires_dist" in response.get("info", {}):
+        dependencies = response.get("info", {})["requires_dist"]
+    else:
+        return ""
+    if dependencies == None:
+        return ""
     return ",".join(dependencies).split(',')
     
-
-def convertDicts(pack_name, dicts, depth, i):
+vis = set()
+def convertDicts(pack_name, dependencies, depth):
+    if dependencies == "" or depth == 0:
+        return f"\"{pack_name}\""
+    
     GraphCode = ""
     visited = set()
-    for pack in dicts:
+    
+    for pack in dependencies:
         match = re.match(r'^[a-zA-Z0-9_-]+',pack)
         if match:
             name_pack = pack[:match.end()]
@@ -22,14 +31,15 @@ def convertDicts(pack_name, dicts, depth, i):
         if name_pack in visited or name_pack == "":
             pass
         else:
-            if re.match(r'^[a-zA-Z0-9_-]+',name_pack):
+            if re.match(r'^[a-zA-Z0-9_-]+',name_pack) and name_pack != pack_name:
                 GraphCode += f"\"{pack_name}\"->\"{name_pack}\"\n"
                 visited.add(name_pack)
-        
-        if i < depth:
-            dependency_tree = get_dependencies(name_pack)
-            links = convertDicts(name_pack,dependency_tree, depth-i, 1)
-            GraphCode += links
+                vis.add(pack_name)
+                print(name_pack, depth)
+                if 1 < depth:
+                    depth_pack = depth - 1
+                    dependencies_pack = get_dependencies(name_pack)
+                    GraphCode += convertDicts(name_pack, dependencies_pack, depth_pack)
     
     return GraphCode
 
@@ -53,8 +63,7 @@ def main():
     depth = int(args.depth)
 
     dependencies = get_dependencies(package_name)
-
-    links = convertDicts(package_name,dependencies, depth, 1)
+    links = convertDicts(package_name,dependencies, depth)
     graph_code = "digraph G {\n" + links + "}"
     render_graph(graph_code, output)
 
