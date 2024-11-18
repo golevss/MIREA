@@ -21,7 +21,6 @@ def get_dependencies_git(package_url):
             dependencies.add(line)
     return dependencies
     
-vis = set()
 def convertDicts(pack_name, dependencies, depth):
     if dependencies == "" or depth == 0:
         return f"\"{pack_name}\""
@@ -42,7 +41,6 @@ def convertDicts(pack_name, dependencies, depth):
             if re.match(r'^[a-zA-Z0-9_-]+',name_pack) and name_pack != pack_name:
                 GraphCode += f"\"{pack_name}\"->\"{name_pack}\"\n"
                 visited.add(name_pack)
-                vis.add(pack_name)
                 #print(name_pack, depth)
                 if 1 < depth:
                     depth_pack = depth - 1
