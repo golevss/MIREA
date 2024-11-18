@@ -12,6 +12,14 @@ def get_dependencies(package_name):
     if dependencies == None:
         return ""
     return ",".join(dependencies).split(',')
+
+def get_dependencies_git(package_url):
+    response = requests.get(package_url)
+    dependencies = set()
+    for line in response.text.splitlines():
+        if line[0] != '-':
+            dependencies.add(line)
+    return dependencies
     
 vis = set()
 def convertDicts(pack_name, dependencies, depth):
@@ -35,7 +43,7 @@ def convertDicts(pack_name, dependencies, depth):
                 GraphCode += f"\"{pack_name}\"->\"{name_pack}\"\n"
                 visited.add(name_pack)
                 vis.add(pack_name)
-                print(name_pack, depth)
+                #print(name_pack, depth)
                 if 1 < depth:
                     depth_pack = depth - 1
                     dependencies_pack = get_dependencies(name_pack)
@@ -58,14 +66,30 @@ def main():
     args = parser.parse_args()
 
     error_message = "Cannot get dependencies for this package"
-    package_name = args.package
     output = args.output
     depth = int(args.depth)
 
-    dependencies = get_dependencies(package_name)
-    links = convertDicts(package_name,dependencies, depth)
-    graph_code = "digraph G {\n" + links + "}"
-    render_graph(graph_code, output)
+    if args.package:
+        package_name = args.package
+        dependencies = get_dependencies(package_name)
+        if dependencies:
+            links = convertDicts(package_name,dependencies, depth)
+            graph_code = "digraph G {\n" + links + "}"
+            render_graph(graph_code, output)
+        else:
+            print (error_message)
+    elif args.url:
+        package_url = args.url
+        package_name = package_url.split('/')[4]
+        dependencies = get_dependencies_git(package_url)
+        if dependencies:
+            links = convertDicts(package_name,dependencies, depth)
+            graph_code = "digraph G {\n" + links + "}"
+            render_graph(graph_code, output)
+        else:
+            print(error_message)
+    else:
+        print (error_message)
 
 if __name__ == '__main__':
     main()

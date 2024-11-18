@@ -16,7 +16,7 @@ python3 main.py --graphviz "C:\\Program Files\\Graphviz\\bin\\dot.exe" --package
 ```
 ### Запуск через репозитория 
 ```
-python3 main.py --graphviz "C:\\Program Files\\Graphviz\\bin\\dot.exe" --url https://github.com/psf/requests --output graph --depth 1
+python3 main.py --graphviz "C:\\Program Files\\Graphviz\\bin\\dot.exe" --url https://raw.githubusercontent.com/psf/requests/main/requirements-dev.txt --output graph --depth 1
 ```
 ### Тесты
 ```
