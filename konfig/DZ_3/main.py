@@ -5,7 +5,7 @@ import sys
 def process_array(arr):
     result = "(list"
     for item in arr:
-        result += f" {process_value(item)}"
+        result += f" {item}"
     result += " )"
     return result
 
