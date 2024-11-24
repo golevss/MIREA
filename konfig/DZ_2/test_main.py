@@ -62,13 +62,22 @@ class TestPackageDependencies(unittest.TestCase):
         self.assertIn('"example_package"->"requests"', result)
 
     def test_convertDicts_2(self):
-        dependencies = ['pack1!=1.6.5', 'pack2>=1.5.6']
+        dependencies = ['pack1!=1.6.5', 'pack2>=1.5.6', ' ', 'pack3>=1.5.6']
         package_name = "head_pack"
-        depth = 2
+        depth = 1
         result = convertDicts(package_name, dependencies, depth)
         
         self.assertIn('"head_pack"->"pack1"', result)
         self.assertIn('"head_pack"->"pack2"', result)
+        self.assertIn('"head_pack"->"pack3"', result)
+
+    def test_convertDicts_3(self):
+        dependencies = ['pack1!=1.6.5', 'pack2>=1.5.6', ' ', 'pack3>=1.5.6']
+        package_name = "head_pack"
+        depth = 0
+        result = convertDicts(package_name, dependencies, depth)
+        
+        self.assertIn('"head_pack"', result)
     
     @patch('graphviz.Source.render')
     def test_render_graph(self, mock_render):
