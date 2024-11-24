@@ -20,5 +20,8 @@ python3 main.py --graphviz "C:\\Program Files\\Graphviz\\bin\\dot.exe" --url htt
 ```
 ### Тесты
 ```
-python3 -m unittest test_main.py
+python3 -m coverage run -m test_main
+```
+```
+python3 -m coverage report
 ```

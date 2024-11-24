@@ -53,9 +53,9 @@ def convertDicts(pack_name, dependencies, depth):
 def render_graph(dot_code, output_file):
     graph = graphviz.Source(dot_code)
     graph.render(output_file, format='png', cleanup=True)
-    print(f"Graph saved as {output_file}.png")
+    print(f"Graph saved as {output_file}.png")    
 
-def main():
+if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Viz")
     parser.add_argument('--graphviz')
     parser.add_argument('--package')
@@ -89,6 +89,3 @@ def main():
             print(error_message)
     else:
         print (error_message)
-
-if __name__ == '__main__':
-    main()

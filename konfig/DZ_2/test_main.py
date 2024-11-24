@@ -21,6 +21,7 @@ class TestPackageDependencies(unittest.TestCase):
         self.assertEqual(result, ['numpy', 'requests'])
         mock_get.assert_called_once_with(f'https://pypi.org/pypi/{package_name}/json')
 
+
     @patch('requests.get')
     def test_get_dependencies_no_requires_dist(self, mock_get):
         mock_response = MagicMock()
@@ -59,6 +60,15 @@ class TestPackageDependencies(unittest.TestCase):
         
         self.assertIn('"example_package"->"numpy"', result)
         self.assertIn('"example_package"->"requests"', result)
+
+    def test_convertDicts_2(self):
+        dependencies = ['pack1!=1.6.5', 'pack2>=1.5.6']
+        package_name = "head_pack"
+        depth = 2
+        result = convertDicts(package_name, dependencies, depth)
+        
+        self.assertIn('"head_pack"->"pack1"', result)
+        self.assertIn('"head_pack"->"pack2"', result)
     
     @patch('graphviz.Source.render')
     def test_render_graph(self, mock_render):
@@ -68,6 +78,16 @@ class TestPackageDependencies(unittest.TestCase):
         render_graph(dot_code, output_file)
         
         mock_render.assert_called_once_with(output_file, format='png', cleanup=True)
+
+    @patch('graphviz.Source.render')
+    def test_render_graph_2(self, mock_render):
+        dot_code = 'digraph G { "A"->"B";"B"->"C"; }'
+        output_file = 'output_graph'
+        
+        render_graph(dot_code, output_file)
+        
+        mock_render.assert_called_once_with(output_file, format='png', cleanup=True)
+
 
 if __name__ == '__main__':
     unittest.main()
