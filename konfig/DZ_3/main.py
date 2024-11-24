@@ -3,6 +3,8 @@ import argparse
 import sys
 import re
 
+name = r'[_a-z]+'
+consts = []
 
 def process_array(arr):
     result = "(list"
@@ -12,14 +14,28 @@ def process_array(arr):
     return result
 
 def process_object(obj):
-    name = r'[_a-z]+'
     result = "struct {\n"
     for key, value in obj.items():
-        if re.match(name,key):
-            result += f"    {key} = {process_value(value)},\n"
+        if key == "constants":
+            result += f"{process_cons(value)}"
+        elif re.match(name,key):
+            result += f"\t{key} = {process_value(value)},\n"
         else:
             raise ValueError(f"Unsupported name: {key}")
     result += "}"
+    return result
+
+def process_cons(obj):
+    result = ""
+    for key, value in obj.items():
+        if re.match(name,key) and isinstance(value, (int, float)):
+            if key in consts:
+                raise ValueError(f"Unsupported name: {key}")
+            else:
+                result += f"\tdef {key} := {value};\n"
+                consts.append(value)
+        else:
+            raise ValueError(f"Unsupported name: {key}")
     return result
 
 def process_value(value):
