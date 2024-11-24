@@ -19,8 +19,12 @@ def process_object(obj,d):
         if key == "constants":
             result = f"{process_cons(value)}" + result
         elif re.match(name,key):
-            result += '\t'*d
-            result += f"{key} = {process_value(value,d+1)},\n"
+            if key in consts:
+                raise ValueError(f"Wrong var: {key}")
+            else:
+                result += '\t'*d
+                result += f"{key} = {process_value(value,d+1)},\n"
+                consts.append(key)
         else:
             raise ValueError(f"Unsupported name: {key}")
     result = result[:-2] + '\n' + '\t'*(d-1) + '}'
@@ -29,14 +33,14 @@ def process_object(obj,d):
 def process_cons(obj):
     result = ""
     for key, value in obj.items():
-        if re.match(name,key) and isinstance(value, (int, float)):
+        if re.match(name,key):
             if key in consts:
-                raise ValueError(f"Wrong const: {key}")
+                raise ValueError(f"Wrong var: {key}")
             else:
-                result += f"def {key} := {value};\n"
-                consts.append(value)
+                result += f"def {key} := {process_value(value,1)};\n"
+                consts.append(key)
         else:
-            raise ValueError(f"Unsupported name: {key}, or type: {type(value)}")
+            raise ValueError(f"Unsupported name: {key}")
     return result
 
 def process_value(value,d):
@@ -48,7 +52,7 @@ def process_value(value,d):
         return process_object(value,d)
     else:
         raise ValueError(f"Unsupported type: {type(value)}")
-    
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Translator")
     parser.add_argument('--input')
