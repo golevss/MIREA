@@ -7,7 +7,7 @@ struct {
 		val_1 = 1,
 		val_2 = 2,
 		val_3 = 3,
-		val_4 = 4	
-},
-	value_2 = 61	
+		val_4 = 4
+	},
+	value_2 = 61
 }

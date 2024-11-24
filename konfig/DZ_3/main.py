@@ -23,7 +23,7 @@ def process_object(obj,d):
             result += f"{key} = {process_value(value,d+1)},\n"
         else:
             raise ValueError(f"Unsupported name: {key}")
-    result = result[:-2] + '\t' + '\n}'
+    result = result[:-2] + '\n' + '\t'*(d-1) + '}'
     return result
 
 def process_cons(obj):
