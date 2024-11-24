@@ -32,7 +32,6 @@ def process_value(value):
     
 if __name__ == "__main__":
     if len(sys.argv) != 3:
-        print("Usage: python translator.py <input.json> <output.txt>")
         sys.exit(1)
 
     input_file = sys.argv[1]
