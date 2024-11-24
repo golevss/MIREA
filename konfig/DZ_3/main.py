@@ -1,5 +1,6 @@
 import json
 import sys
+import re
 
 
 def process_array(arr):
@@ -9,14 +10,16 @@ def process_array(arr):
     result += " )"
     return result
 
-
 def process_object(obj):
+    name = r'[_a-z]+'
     result = "struct {\n"
     for key, value in obj.items():
-        result += f"    {key} = {process_value(value)},\n"
+        if re.match(name,key):
+            result += f"    {key} = {process_value(value)},\n"
+        else:
+            raise ValueError(f"Unsupported name: {key}")
     result += "}"
     return result
-
 
 def process_value(value):
     if isinstance(value, (int, float)):
@@ -28,7 +31,7 @@ def process_value(value):
     elif isinstance(value, dict):
         return process_object(value)
     else:
-        raise ValueError(f"Unsupported JSON value type: {type(value)}")
+        raise ValueError(f"Unsupported type: {type(value)}")
     
 if __name__ == "__main__":
     if len(sys.argv) != 3:
