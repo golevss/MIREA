@@ -1,13 +1,35 @@
-def pi := 3.14;
-def e := 2.71;
 struct {
-	value = 15,
-	values_1 = (list 1 2 3 4 5 ),
-	values_2 = struct {
-		val_1 = 1,
-		val_2 = 2,
-		val_3 = 3,
-		val_4 = 4
+	home = struct {
+		rooms = struct {
+			bedroom = struct {
+				temperature = 22
+			},
+			living_room = struct {
+				lights = (list struct {
+					id = 1,
+					state = struct {
+						on = 0
+					}
+				} struct {
+					id = 2,
+					state = struct {
+						on = 1
+					}
+				} )
+			}
+		}
 	},
-	value_2 = 61
+	automation = (list struct {
+		trigger = struct {
+			event = 0
+		},
+		actions = (list struct {
+			device = struct {
+				id = 1,
+				action = struct {
+					turn_on = 1
+				}
+			}
+		} )
+	} )
 }

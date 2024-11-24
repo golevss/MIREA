@@ -1,0 +1,42 @@
+{
+    "home": {
+        "rooms": {
+            "bedroom": {
+                "temperature": 22
+            },
+            "living_room": {
+                "lights": [
+                    {
+                        "id": 1,
+                        "state": {
+                            "on": 0
+                        }
+                    },
+                    {
+                        "id": 2,
+                        "state": {
+                            "on": 1
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "automation": [
+        {
+            "trigger": {
+                "event": 0
+            },
+            "actions": [
+                {
+                    "device": {
+                        "id": 1,
+                        "action": {
+                            "turn_on": 1
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -6,10 +6,10 @@ import re
 name = r'[_a-z]+'
 consts = []
 
-def process_array(arr):
+def process_array(arr,d):
     result = "(list"
     for item in arr:
-        result += f" {item}"
+        result += f" {process_value(item,d)}"
     result += " )"
     return result
 
@@ -43,7 +43,7 @@ def process_value(value,d):
     if isinstance(value, (int, float)):
         return str(value)
     elif isinstance(value, list):
-        return process_array(value)
+        return process_array(value,d)
     elif isinstance(value, dict):
         return process_object(value,d)
     else:

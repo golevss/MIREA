@@ -1,0 +1,30 @@
+{
+    "server": {
+        "host": {
+            "ip": [127,0,0,1],
+            "port": 8080
+        },
+        "ssl": {
+            "enabled": 1
+        }
+    },
+    "routes": [
+        {
+            "path": {
+                "uri": 1,
+                "method": 2
+            }
+        },
+        {
+            "path": {
+                "uri": 1,
+                "method": 2
+            }
+        }
+    ],
+    "logging": {
+        "level": {
+            "value": 2
+        }
+    }
+}
