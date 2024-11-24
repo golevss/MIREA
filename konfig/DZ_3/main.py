@@ -13,16 +13,17 @@ def process_array(arr):
     result += " )"
     return result
 
-def process_object(obj):
+def process_object(obj,d):
     result = "struct {\n"
     for key, value in obj.items():
         if key == "constants":
             result = f"{process_cons(value)}" + result
         elif re.match(name,key):
-            result += f"\t{key} = {process_value(value)},\n"
+            result += '\t'*d
+            result += f"{key} = {process_value(value,d+1)},\n"
         else:
             raise ValueError(f"Unsupported name: {key}")
-    result += "}"
+    result = result[:-2] + '\t' + '\n}'
     return result
 
 def process_cons(obj):
@@ -30,21 +31,21 @@ def process_cons(obj):
     for key, value in obj.items():
         if re.match(name,key) and isinstance(value, (int, float)):
             if key in consts:
-                raise ValueError(f"Unsupported name: {key}")
+                raise ValueError(f"Wrong const: {key}")
             else:
                 result += f"def {key} := {value};\n"
                 consts.append(value)
         else:
-            raise ValueError(f"Unsupported name: {key}")
+            raise ValueError(f"Unsupported name: {key}, or type: {type(value)}")
     return result
 
-def process_value(value):
+def process_value(value,d):
     if isinstance(value, (int, float)):
         return str(value)
     elif isinstance(value, list):
         return process_array(value)
     elif isinstance(value, dict):
-        return process_object(value)
+        return process_object(value,d)
     else:
         raise ValueError(f"Unsupported type: {type(value)}")
     
@@ -60,7 +61,7 @@ if __name__ == "__main__":
     try:
         with open(input_file, "r", encoding="utf-8") as f:
             data = json.load(f)
-        result = process_object(data)
+        result = process_object(data,1)
 
         with open(output_file, "w", encoding="utf-8") as f:
             f.write(result)

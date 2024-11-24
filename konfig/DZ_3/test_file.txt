@@ -1,12 +1,13 @@
 def pi := 3.14;
 def e := 2.71;
 struct {
-		value = 15,
-		values_1 = (list 1 2 3 4 5 ),
-		values_2 = struct {
+	value = 15,
+	values_1 = (list 1 2 3 4 5 ),
+	values_2 = struct {
 		val_1 = 1,
 		val_2 = 2,
 		val_3 = 3,
-		val_4 = 4,
+		val_4 = 4	
 },
+	value_2 = 61	
 }
