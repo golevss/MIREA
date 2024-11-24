@@ -17,7 +17,7 @@ def process_object(obj):
     result = "struct {\n"
     for key, value in obj.items():
         if key == "constants":
-            result += f"{process_cons(value)}"
+            result = f"{process_cons(value)}" + result
         elif re.match(name,key):
             result += f"\t{key} = {process_value(value)},\n"
         else:
@@ -32,7 +32,7 @@ def process_cons(obj):
             if key in consts:
                 raise ValueError(f"Unsupported name: {key}")
             else:
-                result += f"\tdef {key} := {value};\n"
+                result += f"def {key} := {value};\n"
                 consts.append(value)
         else:
             raise ValueError(f"Unsupported name: {key}")
