@@ -1,4 +1,5 @@
 import json
+import argparse
 import sys
 import re
 
@@ -24,8 +25,6 @@ def process_object(obj):
 def process_value(value):
     if isinstance(value, (int, float)):
         return str(value)
-    elif isinstance(value, str):
-        return f"\"{value}\""
     elif isinstance(value, list):
         return process_array(value)
     elif isinstance(value, dict):
@@ -34,11 +33,13 @@ def process_value(value):
         raise ValueError(f"Unsupported type: {type(value)}")
     
 if __name__ == "__main__":
-    if len(sys.argv) != 3:
-        sys.exit(1)
+    parser = argparse.ArgumentParser(description="Translator")
+    parser.add_argument('--input')
+    parser.add_argument('--output')
+    args = parser.parse_args()
 
-    input_file = sys.argv[1]
-    output_file = sys.argv[2]
+    input_file = args.input
+    output_file = args.output
 
     try:
         with open(input_file, "r", encoding="utf-8") as f:
