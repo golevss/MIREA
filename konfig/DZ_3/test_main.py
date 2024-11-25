@@ -1,8 +1,7 @@
 import unittest
-import json
 import argparse
 from io import StringIO
-from unittest.mock import patch
+from unittest.mock import patch, mock_open
 
 from main import *
 
@@ -35,8 +34,8 @@ class TestTranslator(unittest.TestCase):
         self.assertEqual(process_object(input_data, 1), expected_output)
 
     def test_process_object_array_coms(self):
-        input_data = {"values": {"pi": 3.14, "e": 2.71}, "key": 12, "coments": {"key" : 12}}
-        expected_output = "\ key = 12\nstruct {\n\tvalues = struct {\n\t\tpi = 3.14,\n\t\te = 2.71\n\t},\n\tkey = 12\n}"
+        input_data = {"constants": {"key": 12}, "values": {"pi": 3.14, "e": 2.71}, "key": 12, "coments": {"key" : 12}}
+        expected_output = "\ key = 12\ndef key := 12;\nstruct {\n\tvalues = struct {\n\t\tpi = 3.14,\n\t\te = 2.71\n\t},\n\tkey = 12\n}"
         global consts
         consts = []
         self.assertEqual(process_object(input_data, 1), expected_output)
@@ -79,6 +78,16 @@ class TestTranslator(unittest.TestCase):
             with self.assertRaises(SystemExit):
                 main(input_file, output_file)
             self.assertIn("Error:", mock_stdout.getvalue())
+
+    @patch("builtins.open", new_callable=mock_open, read_data='{"key": 12}')
+    @patch("sys.stdout", new_callable=StringIO)
+    def test_main_success(self, mock_stdout, mock_open):
+        input_file = "input.json"
+        output_file = "output.txt"
+        with patch("main.process_object", return_value="struct {\n\tkey = 12\n}"):
+            main(input_file, output_file)
+        self.assertIn("Translation completed successfully.", mock_stdout.getvalue())
+        mock_open().write.assert_called_once_with("struct {\n\tkey = 12\n}")
 
 if __name__ == "__main__":
     unittest.main()
