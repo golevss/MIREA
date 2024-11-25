@@ -6,51 +6,37 @@ def din_to_str(binary_file):
         binary_data = f.read()
     
     return ' '.join(f'{byte:08b}' for byte in binary_data).split(' ')
-        
 
 def interpret(binary_file, output_file, memory_range):
     memory = [0] * 1024
-    registers = [0] * 1024
+    registers = [0] * 32
 
     all_bin = din_to_str(binary_file)
     while all_bin != []:
         bin_code = ""
-        
+
         for i in range (6):
             bin_code += all_bin[i]
         all_bin = all_bin[6:]
 
-        A = bin_code[:2]
-
-        print()
-        print(A,int(A,2))
-
-        if int(A,2) == 1:  # LOAD
-            B = bin_code[3:8]
-            C = bin_code[9:21]
-            #registers[B] = C
-            print(B,int(B,2))
-            print(C,int(C,2))
-        elif int(A,2) == 0:  # READ
-            B = bin_code[3:8]
-            C = bin_code[9:21]
-            print(B,int(B,2))
-            print(C,int(C,2))
-            #registers[B] = memory[registers[C]]
-        elif int(A,2) == 2:  # WRITE
-            B = bin_code[3:35]
-            C = bin_code[35:41]
-            print(B,int(B,2))
-            print(C,int(C,2))
-            #memory[registers[B]] = registers[C]
-        elif int(A,2) == 3:  # MUL
-            B = bin_code[3:8]
-            C = bin_code[9:14]
-            D = bin_code[15:45]
-            print(B,int(B,2))
-            print(C,int(C,2))
-            print(C,int(D,2))
-            #registers[B] = registers[C] * memory[D]
+        A = int(bin_code[:2],2)
+        if A == 1:  # LOAD
+            B = int(bin_code[3:8],2)
+            C = int(bin_code[9:21],2)
+            registers[B] = C
+        elif A == 0:  # READ
+            B = int(bin_code[3:8],2)
+            C = int(bin_code[9:21],2)
+            registers[B] = memory[registers[C]]
+        elif A == 2:  # WRITE
+            B = int(bin_code[3:35],2)
+            C = int(bin_code[35:41],2)
+            memory[registers[B]] = registers[C]
+        elif A == 3:  # MUL
+            B = int(bin_code[3:8],2)
+            C = int(bin_code[9:13],2)
+            D = int(bin_code[15:45],2)
+            registers[B] = registers[C] * memory[D]
         else:
             raise ValueError(f"Unknown instruction with A={int(A,2)}")
     
