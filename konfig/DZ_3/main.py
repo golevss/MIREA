@@ -14,17 +14,20 @@ def process_array(arr,d):
     return result
 
 def process_object(obj,d):
+    vars = []
     result = "struct {\n"
     for key, value in obj.items():
         if key == "constants":
             result = f"{process_cons(value)}" + result
+        elif key == "coments":
+            result = f"{process_coms(value)}" + result
         elif re.match(name,key):
-            if key in consts:
+            if key in vars:
                 raise ValueError(f"Wrong var: {key}")
             else:
                 result += '\t'*d
                 result += f"{key} = {process_value(value,d+1)},\n"
-                consts.append(key)
+                vars.append(key)
         else:
             raise ValueError(f"Unsupported name: {key}")
     result = result[:-2] + '\n' + '\t'*(d-1) + '}'
@@ -41,6 +44,12 @@ def process_cons(obj):
                 consts.append(key)
         else:
             raise ValueError(f"Unsupported name: {key}")
+    return result
+
+def process_coms(obj):
+    result = ""
+    for key, value in obj.items():
+        result += f'\ "{key}": {value}\n'
     return result
 
 def process_value(value,d):
