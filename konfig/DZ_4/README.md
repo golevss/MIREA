@@ -57,3 +57,16 @@
 ### Тестовая программа
 
 Выполнить поэлементно операцию `умножение` над двумя векторами длины 4.Результат записать в первый вектор.
+
+# Запуск
+### Ассемблер и интерпретатор
+```
+python assembler.py --input test_cmd.txt --bin program.bin --log log.yaml
+```
+```
+python interpreter.py --bin program.bin --out output.yaml --range 0 10
+```
+### Тесты
+```
+python3 -m coverage run -m test_assemb
+```
