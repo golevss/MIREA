@@ -40,7 +40,6 @@ def interpret(binary_file, output_file, memory_range):
         else:
             raise ValueError(f"Unknown instruction with A={int(A,2)}")
     
-    # Сохраняем диапазон памяти
     start, end = memory_range
     with open(output_file, 'w') as f:
         yaml.dump({'memory': memory[start:end]}, f)
