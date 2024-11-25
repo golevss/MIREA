@@ -49,7 +49,7 @@ def process_cons(obj):
 def process_coms(obj):
     result = ""
     for key, value in obj.items():
-        result += f'\ "{key}": {value}\n'
+        result += f'\ {key} = {process_value(value,1)}\n'
     return result
 
 def process_value(value,d):
