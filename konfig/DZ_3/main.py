@@ -62,15 +62,7 @@ def process_value(value,d):
     else:
         raise ValueError(f"Unsupported type: {type(value)}")
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Translator")
-    parser.add_argument('--input')
-    parser.add_argument('--output')
-    args = parser.parse_args()
-
-    input_file = args.input
-    output_file = args.output
-
+def main(input_file,output_file):
     try:
         with open(input_file, "r", encoding="utf-8") as f:
             data = json.load(f)
@@ -84,8 +76,12 @@ if __name__ == "__main__":
         print(f"Error: {e}")
         sys.exit(1)
 
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Translator")
+    parser.add_argument('--input')
+    parser.add_argument('--output')
+    args = parser.parse_args()
 
-
-
-
-
+    input_file = args.input
+    output_file = args.output
+    main(input_file,output_file)
