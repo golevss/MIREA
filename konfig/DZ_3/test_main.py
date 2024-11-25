@@ -33,6 +33,13 @@ class TestTranslator(unittest.TestCase):
         global consts
         consts = []
         self.assertEqual(process_object(input_data, 1), expected_output)
+
+    def test_process_object_array_coms(self):
+        input_data = {"values": {"pi": 3.14, "e": 2.71}, "key": 12, "coments": {"key" : 12}}
+        expected_output = "\ key = 12\nstruct {\n\tvalues = struct {\n\t\tpi = 3.14,\n\t\te = 2.71\n\t},\n\tkey = 12\n}"
+        global consts
+        consts = []
+        self.assertEqual(process_object(input_data, 1), expected_output)
     
     def test_process_cons(self):
         input_data = {"pi": 3.14, "e": 2.71}
@@ -43,7 +50,7 @@ class TestTranslator(unittest.TestCase):
 
     def test_process_coms(self):
         input_data = {"author": 12, "date": 11}
-        expected_output = '\ "author": 12\n\ "date": 11\n'
+        expected_output = '\ author = 12\n\ date = 11\n'
         self.assertEqual(process_coms(input_data), expected_output)
 
     def test_process_value_int(self):
