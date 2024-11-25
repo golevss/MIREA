@@ -1,5 +1,5 @@
 import yaml
-import struct
+import argparse
 import sys
 
 def assemble(input_file, output_file, log_file):
@@ -41,4 +41,9 @@ def assemble(input_file, output_file, log_file):
         yaml.dump(log_data, f)
 
 if __name__ == "__main__":
-    assemble(sys.argv[1], sys.argv[2], sys.argv[3])
+    parser = argparse.ArgumentParser(description="Assembler")
+    parser.add_argument('--input')
+    parser.add_argument('--bin')
+    parser.add_argument('--log')
+    args = parser.parse_args()
+    assemble(args.input, args.bin, args.log)
