@@ -19,14 +19,14 @@ def interpret(binary_file, output_file, memory_range):
             bin_code += all_bin[i]
         all_bin = all_bin[6:]
 
-        A = int(bin_code[:2],2)
+        A = int(bin_code[:3],2)
         if A == 1:  # LOAD
             B = int(bin_code[3:8],2)
-            C = int(bin_code[9:21],2)
+            C = int(bin_code[8:21],2)
             registers[B] = C
-        elif A == 0:  # READ
+        elif A == 7:  # READ
             B = int(bin_code[3:8],2)
-            C = int(bin_code[9:21],2)
+            C = int(bin_code[8:21],2)
             registers[B] = memory[registers[C]]
         elif A == 2:  # WRITE
             B = int(bin_code[3:35],2)
@@ -34,8 +34,8 @@ def interpret(binary_file, output_file, memory_range):
             memory[registers[B]] = registers[C]
         elif A == 3:  # MUL
             B = int(bin_code[3:8],2)
-            C = int(bin_code[9:13],2)
-            D = int(bin_code[15:45],2)
+            C = int(bin_code[8:13],2)
+            D = int(bin_code[13:45],2)
             registers[B] = registers[C] * memory[D]
         else:
             raise ValueError(f"Unknown instruction with A={int(A,2)}")

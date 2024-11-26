@@ -17,16 +17,16 @@ def assemble(input_file, output_file, log_file):
 
         if command == "LOAD":
             A, B, C = 1, int(parts[1]), int(parts[2])
-            instr = (A << 46) | (B << 40) | (C << 27)
+            instr = (A << 45) | (B << 40) | (C << 27)
         elif command == "READ":
-            A, B, C = 0, int(parts[1]), int(parts[2])
-            instr = (A << 46) | (B << 40) | (C << 27)
+            A, B, C = 7, int(parts[1]), int(parts[2])
+            instr = (A << 45) | (B << 40) | (C << 27)
         elif command == "WRITE":
             A, B, C = 2, int(parts[1]), int(parts[2])
-            instr = (A << 46) | (B << 13) | (C << 7)
+            instr = (A << 45) | (B << 13) | (C << 7)
         elif command == "MUL":
             A, B, C, D = 3, int(parts[1]), int(parts[2]), int(parts[3])
-            instr = (A << 46) | (B << 40) | (C << 35) | (D << 3)
+            instr = (A << 45) | (B << 40) | (C << 35) | (D << 3)
         else:
             raise ValueError(f"Unknown command: {command}")
 
