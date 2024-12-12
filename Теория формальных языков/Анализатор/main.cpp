@@ -233,6 +233,7 @@ struct lex
 			y_coord++;
 			reading_mechanism(inputString);
 		}
+		proc_tokens();
 	}
 	// Считывающая машина представляющая собой конечный автомат
 	void reading_mechanism(std::string inputString)
@@ -289,7 +290,7 @@ struct lex
 				}
 				else
 				{
-					if (key_lex() || sep_lex())
+					if (key_lex() || sep_lex() || num_lex() || id_lex())
 					{
 						clear_string();
 						x_coord = i + 1;
@@ -341,9 +342,9 @@ struct lex
 					std::cerr << "ERROR (incorrect comparison opperator) -> " << lexBuff << " (" << y_coord << ',' << x_coord << ')' << std::endl;
 					exit(103);
 				}
-				else if (lexBuff[0] != c)
+				else if (lexBuff.size() == 1 && (lexBuff != ">" && lexBuff != "<"))
 				{
-					std::cerr << "ERROR (incorrect assigment opperator) -> " << lexBuff << " (" << y_coord << ',' << x_coord << ')' << std::endl;
+					std::cerr << "ERROR (incorrect opperator) -> " << lexBuff << " (" << y_coord << ',' << x_coord << ')' << std::endl;
 					exit(104);
 				}
 				else
@@ -386,7 +387,6 @@ struct lex
 			}
 		}
 		clear_string();
-		proc_tokens();
 	}
 	// Метода добавления символа в лексему
 	void add_to_string() {lexBuff += c;}
@@ -401,7 +401,7 @@ struct lex
 			tokensVec.push_back(buffToken);
 		else
 		{
-			std::cerr << "ERROR (incorrect identificator) -> " << buffToken.value << " (" << y_coord << ',' << x_coord << ')' << std::endl;
+			std::cerr << "ERROR (incorrect input) -> " << buffToken.value << " (" << y_coord << ',' << x_coord << ')' << std::endl;
 			exit(102);
 		}
 	}
@@ -439,13 +439,23 @@ struct lex
 	bool num_lex()
 	{
 		char lastSymb = tolower(buffToken.value[buffToken.value.size() - 1]);
-		if ((isdigit(buffToken.value[0]) &&
-			(lastSymb == 'b' || lastSymb == 'o' || lastSymb == 'd' || lastSymb == 'h'))
-			|| check_e(buffToken.value))
-		{
-			buffToken.type = LEX_NUM;
-			return true;
-		}
+		if (isdigit(buffToken.value[0]) || buffToken.value[0] == '.')
+			if (isalpha(lastSymb))
+				if (lastSymb == 'b' || lastSymb == 'o' || lastSymb == 'd' || lastSymb == 'h')
+				{
+					buffToken.type = LEX_NUM;
+						return true;
+				}
+				else
+				{
+					return false;
+				}
+			else if (check_e(buffToken.value))
+				{
+					buffToken.type = LEX_NUM;
+					return true;
+				}
+		
 		return false;
 	}
 	// Метод проверки на идентификаторв
@@ -828,7 +838,8 @@ struct parser
 	void start_M()
 	{
 		if (tokensVec[idx].type == LEX_ID)
-		{
+		{	
+			if (tokensVar[0].varType == "BOOL") ifWhileFlag = true;
 			id_check();
 			idx++;
 		}
@@ -888,12 +899,12 @@ struct parser
 
 int main()
 {
-	const char* inputFileName = "input_file_3.txt";
+	const char* inputFileName = "input_file.txt";
 	lex lexAnalys(inputFileName);
-	//lexAnalys.print_all_tokens(); // Вывод лексем
+	lexAnalys.print_all_tokens(); // Вывод лексем
 
-	parser syntAnalys(lexAnalys.tokensVec);
-	syntAnalys.start_prog();
+	// parser syntAnalys(lexAnalys.tokensVec);
+	// syntAnalys.start_prog();
 
 	std::cout << "CORRECT" << std::endl;
 	return 0;
