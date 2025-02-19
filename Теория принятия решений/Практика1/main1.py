@@ -39,5 +39,6 @@ def pareto(alts):
 
 opt_alt = pareto(alts)
 
+print("Оптимальное множество:")
 for alt in opt_alt:
     print(alt["name"])
