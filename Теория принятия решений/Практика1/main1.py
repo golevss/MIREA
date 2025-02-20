@@ -34,6 +34,7 @@ def pareto(alts):
             if dom(alts[i], alts[j]):
                 pareto.append(alts[i])
                 break
+                
     
     return pareto
 
