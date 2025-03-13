@@ -74,5 +74,5 @@ for i in range(N):
         else:
             pref_table.loc[i,j] = compare(alts.loc[i], alts.loc[j])
 
-print("\nМатрицы предпочтений с порогом 1.5")
+print("\nМатрицы предпочтений с порогом 1.3")
 print(pref_table)
