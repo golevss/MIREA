@@ -18,6 +18,8 @@ plus_crit = ["speed", "weapons", "shields"]
 
 
 def dom(a, b):
+    if sum(a[min_crit].values == b[min_crit].values) + sum(a[plus_crit].values == b[plus_crit].values):
+        return False
     crits = sum(a[min_crit].values <= b[min_crit].values) + sum(a[plus_crit].values >= b[plus_crit].values)
 
     return crits == len(min_crit) + len(plus_crit)

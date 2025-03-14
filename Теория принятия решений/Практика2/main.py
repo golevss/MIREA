@@ -62,7 +62,7 @@ def compare(s1, s2):
         
     if (N == 0):
         return "inf"
-    if P/N > 1.3:
+    if P/N > 1.334:
         return str(P) + "/" + str(N)
     else:
         return "-"
