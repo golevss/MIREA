@@ -1,0 +1,94 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:137.0) Gecko/20100101 Firefox/137.0" version="26.1.1">
+  <diagram name="Страница — 1" id="PaI8IPLGgFUFwOvJCFp6">
+    <mxGraphModel dx="1050" dy="538" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="LCRRv-766jGbRX7zKB-T-1" value="&lt;div&gt;Студент&lt;/div&gt;" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="63" y="209" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="LCRRv-766jGbRX7zKB-T-32" value="Интерфейс" style="shape=umlBoundary;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="229" y="211" width="100" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="LCRRv-766jGbRX7zKB-T-33" value="Система" style="ellipse;shape=umlControl;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="437" y="211" width="70" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="LCRRv-766jGbRX7zKB-T-34" value="Слушатель" style="ellipse;shape=umlEntity;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="677" y="216" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="LCRRv-766jGbRX7zKB-T-35" value="" style="endArrow=none;html=1;rounded=0;entryX=-0.034;entryY=0.342;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="98" y="250" as="sourcePoint" />
+            <mxPoint x="228.99999999999991" y="249.86" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LCRRv-766jGbRX7zKB-T-36" value="" style="endArrow=none;html=1;rounded=0;entryX=0.006;entryY=0.503;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" target="LCRRv-766jGbRX7zKB-T-33">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="328" y="252" as="sourcePoint" />
+            <mxPoint x="420" y="247" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LCRRv-766jGbRX7zKB-T-37" value="" style="endArrow=none;html=1;rounded=0;exitX=1.003;exitY=0.583;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="LCRRv-766jGbRX7zKB-T-33">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="516" y="259" as="sourcePoint" />
+            <mxPoint x="672" y="258" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LCRRv-766jGbRX7zKB-T-38" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="143" y="239" as="sourcePoint" />
+            <mxPoint x="214" y="239" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LCRRv-766jGbRX7zKB-T-39" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="342.5" y="240.5" as="sourcePoint" />
+            <mxPoint x="413.5" y="240.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LCRRv-766jGbRX7zKB-T-40" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="564" y="250.5" as="sourcePoint" />
+            <mxPoint x="635" y="250.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LCRRv-766jGbRX7zKB-T-41" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="633" y="268" as="sourcePoint" />
+            <mxPoint x="562" y="268" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LCRRv-766jGbRX7zKB-T-42" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="413.5" y="268" as="sourcePoint" />
+            <mxPoint x="342.5" y="268" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LCRRv-766jGbRX7zKB-T-43" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="213" y="267" as="sourcePoint" />
+            <mxPoint x="142" y="267" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LCRRv-766jGbRX7zKB-T-45" value="Запрос записи на семинар" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="126" y="209" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LCRRv-766jGbRX7zKB-T-47" value="Запрос истории посещений" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="335" y="211" width="91" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LCRRv-766jGbRX7zKB-T-48" value="История посещений" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="304" y="269" width="157" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LCRRv-766jGbRX7zKB-T-49" value="Запрос на получение статуса подготовленности" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="520" y="214" width="157" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LCRRv-766jGbRX7zKB-T-50" value="Статус подготовленности" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="533" y="276" width="157" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LCRRv-766jGbRX7zKB-T-51" value="Результат запроса записи на семинар" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="117" y="272" width="108" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
