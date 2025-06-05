@@ -2,7 +2,8 @@ venv/
 htmlcov/
 .pytest_cache/
 .coverage
-kisspy/__pycache__/
-kisspy/module_hierarchy
-kisspy/module_hierarchy.png
-kisspy/pic.svg
+Python/__pycache__/
+Python/module_hierarchy
+Python/module_hierarchy.png
+Python/pic.svg
+_Hackathon_/
