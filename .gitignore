@@ -1,1 +1,8 @@
 venv/
+htmlcov/
+.pytest_cache/
+.coverage
+kisspy/__pycache__/
+kisspy/module_hierarchy
+kisspy/module_hierarchy.png
+kisspy/pic.svg

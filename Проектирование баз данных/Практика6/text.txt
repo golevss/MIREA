@@ -1,0 +1,187 @@
+-- Create tables
+CREATE TABLE support_chat (
+  id_support_chat bigint NOT NULL PRIMARY KEY,
+  id_employee bigint NOT NULL,
+  id_client bigint NOT NULL,
+  status varchar(500) NOT NULL,
+  CONSTRAINT unique_support_chat_id UNIQUE (id_support_chat)
+);
+
+CREATE TABLE address (
+  id_address bigint NOT NULL PRIMARY KEY,
+  id_client bigint NOT NULL,
+  addres varchar(500) NOT NULL
+);
+
+CREATE TABLE client (
+  id_client bigint NOT NULL PRIMARY KEY,
+  nname varchar(500) NOT NULL,
+  phone varchar(500) NOT NULL
+);
+
+CREATE TABLE message (
+  id_message bigint NOT NULL PRIMARY KEY,
+  id_support_chat bigint NOT NULL,
+  ccontent text NOT NULL,
+  ttime time NOT NULL,
+  sender varchar(500) NOT NULL,
+  CONSTRAINT unique_message_id_support_chat UNIQUE (id_support_chat)
+);
+
+CREATE TABLE fabric (
+  id_fabric bigint NOT NULL PRIMARY KEY,
+  addres varchar(500) NOT NULL,
+  phone varchar(500) NOT NULL
+);
+
+CREATE TABLE ordering (
+  id bigint NOT NULL PRIMARY KEY,
+  id_ordering bigint NOT NULL UNIQUE,
+  id_employee bigint NOT NULL,
+  id_addres bigint NOT NULL,
+  id_client bigint NOT NULL,
+  total decimal NOT NULL,
+  ddate date NOT NULL,
+  status varchar(500) NOT NULL,
+  delivey_method varchar(500) NOT NULL
+);
+
+CREATE TABLE rtl_fabric (
+  id_rtl_fabric bigint NOT NULL PRIMARY KEY,
+  id_fabric bigint NOT NULL,
+  id_rtl bigint NOT NULL,
+  CONSTRAINT unique_rtl_fabric_id_fabric UNIQUE (id_fabric)
+);
+
+CREATE TABLE rtl (
+  id_rtl bigint NOT NULL PRIMARY KEY,
+  title varchar(500) NOT NULL,
+  id_supplier bigint NOT NULL,
+  description text NOT NULL,
+  price integer NOT NULL,
+  CONSTRAINT unique_rtl_id UNIQUE (id_rtl)
+);
+
+CREATE TABLE position (
+  id_position bigint NOT NULL PRIMARY KEY,
+  title varchar(500) NOT NULL,
+  salary decimal NOT NULL
+);
+
+CREATE TABLE rtl_category (
+  id_rtl_category bigint NOT NULL PRIMARY KEY,
+  id_category_of_rtl bigint NOT NULL,
+  id_rtl bigint NOT NULL
+);
+
+CREATE TABLE access_data (
+  id_accses_data bigint NOT NULL PRIMARY KEY,
+  id_client bigint NOT NULL UNIQUE,
+  login integer NOT NULL,
+  password integer NOT NULL
+);
+
+CREATE TABLE warehouse (
+  id_warehouse bigint NOT NULL PRIMARY KEY,
+  addres varchar(500) NOT NULL,
+  phone varchar(500) NOT NULL
+);
+
+CREATE TABLE rtl_ordering (
+  id_rtl_order bigint NOT NULL PRIMARY KEY,
+  id_rtl bigint NOT NULL,
+  id_ordering bigint NOT NULL,
+  CONSTRAINT unique_rtl_ordering_id_rtl UNIQUE (id_rtl)
+);
+
+CREATE TABLE transacion (
+  id_transaction bigint NOT NULL PRIMARY KEY,
+  id_ordering bigint NOT NULL,
+  ddate date NOT NULL,
+  CONSTRAINT unique_transacion_id_ordering UNIQUE (id_ordering)
+);
+
+CREATE TABLE review (
+  id_review bigint NOT NULL PRIMARY KEY,
+  id_client bigint NOT NULL,
+  id_rtl bigint NOT NULL,
+  description text NOT NULL,
+  rating smallint NOT NULL,
+  CONSTRAINT unique_review_id_rtl UNIQUE (id_rtl)
+);
+
+CREATE TABLE employee (
+  id_employee bigint NOT NULL PRIMARY KEY,
+  id_position bigint NOT NULL,
+  nname varchar(500) NOT NULL,
+  phone varchar(500) NOT NULL,
+  addres varchar(500) NOT NULL
+);
+
+CREATE TABLE employee_ordering (
+  id_employee_order bigint NOT NULL PRIMARY KEY,
+  id_employee bigint NOT NULL,
+  id_ordering bigint NOT NULL,
+  CONSTRAINT unique_employee_ordering_id_employee UNIQUE (id_employee)
+);
+
+CREATE TABLE rtl_warehouse (
+  id_rtl_warehouse bigint NOT NULL PRIMARY KEY,
+  id_warehouse bigint NOT NULL,
+  id_rtl bigint NOT NULL,
+  CONSTRAINT unique_rtl_warehouse_id_warehouse UNIQUE (id_warehouse)
+);
+
+CREATE TABLE document (
+  id_document bigint NOT NULL PRIMARY KEY,
+  id_employee bigint NOT NULL,
+  creation_date bigint NOT NULL,
+  link varchar(500) NOT NULL,
+  CONSTRAINT unique_document_id_document UNIQUE (id_document)
+);
+
+CREATE TABLE document_ordering (
+  id_document_ordering bigint NOT NULL PRIMARY KEY,
+  id_document bigint NOT NULL,
+  id_ordering bigint NOT NULL,
+  CONSTRAINT unique_document_ordering_id_ordering UNIQUE (id_ordering)
+);
+
+CREATE TABLE supplier (
+  id_supplier bigint NOT NULL PRIMARY KEY,
+  org_title varchar(500) NOT NULL,
+  addres varchar(500) NOT NULL,
+  phone varchar(500) NOT NULL
+);
+
+CREATE TABLE categoty_of_rtl (
+  id_category_of_rtl bigint NOT NULL PRIMARY KEY,
+  description text
+);
+
+-- Add foreign key constraints
+ALTER TABLE warehouse ADD CONSTRAINT warehouse_id_warehouse_fk FOREIGN KEY (id_warehouse) REFERENCES rtl_warehouse (id_warehouse);
+ALTER TABLE fabric ADD CONSTRAINT fabric_id_fabric_fk FOREIGN KEY (id_fabric) REFERENCES rtl_fabric (id_fabric);
+ALTER TABLE rtl_warehouse ADD CONSTRAINT rtl_warehouse_id_rtl_fk FOREIGN KEY (id_rtl) REFERENCES rtl (id_rtl);
+ALTER TABLE rtl_fabric ADD CONSTRAINT rtl_fabric_id_rtl_fk FOREIGN KEY (id_rtl) REFERENCES rtl (id_rtl);
+ALTER TABLE rtl_category ADD CONSTRAINT rtl_category_id_rtl_fk FOREIGN KEY (id_rtl) REFERENCES rtl (id_rtl);
+ALTER TABLE rtl_category ADD CONSTRAINT rtl_category_id_category_of_rtl_fk FOREIGN KEY (id_category_of_rtl) REFERENCES categoty_of_rtl (id_category_of_rtl);
+ALTER TABLE review ADD CONSTRAINT review_id_client_fk FOREIGN KEY (id_client) REFERENCES client (id_client);
+ALTER TABLE review ADD CONSTRAINT review_id_rtl_fk FOREIGN KEY (id_rtl) REFERENCES rtl (id_rtl);
+ALTER TABLE rtl_ordering ADD CONSTRAINT rtl_ordering_id_rtl_fk FOREIGN KEY (id_rtl) REFERENCES rtl (id_rtl);
+ALTER TABLE rtl ADD CONSTRAINT rtl_id_supplier_fk FOREIGN KEY (id_supplier) REFERENCES supplier (id_supplier);
+ALTER TABLE ordering ADD CONSTRAINT ordering_id_ordering_fk FOREIGN KEY (id_ordering) REFERENCES transacion (id_ordering);
+ALTER TABLE ordering ADD CONSTRAINT ordering_id_addres_fk FOREIGN KEY (id_addres) REFERENCES address (id_address);
+ALTER TABLE ordering ADD CONSTRAINT ordering_id_client_fk FOREIGN KEY (id_client) REFERENCES client (id_client);
+ALTER TABLE address ADD CONSTRAINT address_id_client_fk FOREIGN KEY (id_client) REFERENCES client (id_client);
+ALTER TABLE client ADD CONSTRAINT client_id_client_fk FOREIGN KEY (id_client) REFERENCES access_data (id_client);
+ALTER TABLE support_chat ADD CONSTRAINT support_chat_id_client_fk FOREIGN KEY (id_client) REFERENCES client (id_client);
+ALTER TABLE support_chat ADD CONSTRAINT support_chat_id_employee_fk FOREIGN KEY (id_employee) REFERENCES employee (id_employee);
+ALTER TABLE support_chat ADD CONSTRAINT support_chat_id_support_chat_fk FOREIGN KEY (id_support_chat) REFERENCES message (id_support_chat);
+ALTER TABLE employee ADD CONSTRAINT employee_id_position_fk FOREIGN KEY (id_position) REFERENCES position (id_position);
+ALTER TABLE employee_ordering ADD CONSTRAINT employee_ordering_id_employee_fk FOREIGN KEY (id_employee) REFERENCES employee (id_employee);
+ALTER TABLE document ADD CONSTRAINT document_id_employee_fk FOREIGN KEY (id_employee) REFERENCES employee (id_employee);
+ALTER TABLE document_ordering ADD CONSTRAINT document_ordering_id_document_fk FOREIGN KEY (id_document) REFERENCES document (id_document);
+ALTER TABLE document_ordering ADD CONSTRAINT document_ordering_id_ordering_fk FOREIGN KEY (id_ordering) REFERENCES ordering (id_ordering);
+ALTER TABLE rtl_ordering ADD CONSTRAINT rtl_ordering_id_ordering_fk FOREIGN KEY (id_ordering) REFERENCES ordering (id_ordering);
+ALTER TABLE employee_ordering ADD CONSTRAINT employee_ordering_id_ordering_fk FOREIGN KEY (id_ordering) REFERENCES ordering (id_ordering);
