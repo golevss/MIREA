@@ -1,0 +1,118 @@
+; Mon Sep 15 13:53:33 MSK 2025
+; 
+;+ (version "3.2")
+;+ (build "Build 355")
+
+
+(defclass %3ACLIPS_TOP_LEVEL_SLOT_CLASS "Fake class to save top-level slot information"
+	(is-a USER)
+	(role abstract)
+	(single-slot %D0%94%D0%BE%D0%BB%D0%B6%D0%BD%D0%BE%D1%81%D1%82%D1%8C
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot %D0%9E%D1%82%D0%B2%D0%B5%D1%82%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D1%8B%D0%B9
+		(type INSTANCE)
+;+		(allowed-classes)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot GolevProj1_Slot_7
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot %D0%A4%D0%98%D0%9E
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot %D0%9F%D0%BE%D0%B4%D1%87%D0%B8%D0%BD%D1%91%D0%BD%D0%BD%D1%8B%D0%B5
+		(type INSTANCE)
+;+		(allowed-classes)
+		(create-accessor read-write))
+	(single-slot %D0%9F%D0%BE%D0%B4%D1%87%D0%B8%D0%BD%D1%91%D0%BD
+		(type INSTANCE)
+;+		(allowed-classes)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot %D0%9D%D0%B0%D0%B8%D0%BC%D0%B5%D0%BD%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass %D0%9F%D1%81%D0%B8%D1%85%D0%B8%D0%B0%D1%82%D1%80%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F+%D0%B1%D0%BE%D0%BB%D1%8C%D0%BD%D0%B8%D1%86%D0%B0
+	(is-a USER)
+	(role abstract))
+
+(defclass %D0%A1%D0%BE%D1%82%D1%80%D1%83%D0%B4%D0%BD%D0%B8%D0%BA%D0%B8
+	(is-a %D0%9F%D1%81%D0%B8%D1%85%D0%B8%D0%B0%D1%82%D1%80%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F+%D0%B1%D0%BE%D0%BB%D1%8C%D0%BD%D0%B8%D1%86%D0%B0)
+	(role abstract))
+
+(defclass %D0%93%D0%BB%D0%B0%D0%B2%D0%B0+%D1%80%D1%83%D0%BA%D0%BE%D0%B2%D0%BE%D0%B4%D1%81%D1%82%D0%B2%D0%B0
+	(is-a %D0%A1%D0%BE%D1%82%D1%80%D1%83%D0%B4%D0%BD%D0%B8%D0%BA%D0%B8)
+	(role concrete)
+	(single-slot %D0%94%D0%BE%D0%BB%D0%B6%D0%BD%D0%BE%D1%81%D1%82%D1%8C
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot %D0%A4%D0%98%D0%9E
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot %D0%9F%D0%BE%D0%B4%D1%87%D0%B8%D0%BD%D1%91%D0%BD%D0%BD%D1%8B%D0%B5
+		(type INSTANCE)
+;+		(allowed-classes)
+		(create-accessor read-write)))
+
+(defclass %D0%A0%D1%83%D0%BA%D0%BE%D0%B2%D0%BE%D0%B4%D1%81%D1%82%D0%B2%D0%BE
+	(is-a %D0%A1%D0%BE%D1%82%D1%80%D1%83%D0%B4%D0%BD%D0%B8%D0%BA%D0%B8)
+	(role concrete)
+	(single-slot %D0%94%D0%BE%D0%BB%D0%B6%D0%BD%D0%BE%D1%81%D1%82%D1%8C
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot %D0%A4%D0%98%D0%9E
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot %D0%9F%D0%BE%D0%B4%D1%87%D0%B8%D0%BD%D1%91%D0%BD%D0%BD%D1%8B%D0%B5
+		(type INSTANCE)
+;+		(allowed-classes)
+		(create-accessor read-write))
+	(single-slot %D0%9F%D0%BE%D0%B4%D1%87%D0%B8%D0%BD%D1%91%D0%BD
+		(type INSTANCE)
+;+		(allowed-classes)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass %D0%A8%D1%82%D0%B0%D1%82
+	(is-a %D0%A1%D0%BE%D1%82%D1%80%D1%83%D0%B4%D0%BD%D0%B8%D0%BA%D0%B8)
+	(role concrete)
+	(single-slot %D0%94%D0%BE%D0%BB%D0%B6%D0%BD%D0%BE%D1%81%D1%82%D1%8C
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot %D0%A4%D0%98%D0%9E
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot %D0%9F%D0%BE%D0%B4%D1%87%D0%B8%D0%BD%D1%91%D0%BD%D0%BD%D1%8B%D0%B5
+		(type INSTANCE)
+;+		(allowed-classes)
+		(create-accessor read-write))
+	(single-slot %D0%9F%D0%BE%D0%B4%D1%87%D0%B8%D0%BD%D1%91%D0%BD
+		(type INSTANCE)
+;+		(allowed-classes)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass %D0%9F%D0%BE%D0%BC%D0%B5%D1%89%D0%B5%D0%BD%D0%B8%D1%8F
+	(is-a %D0%9F%D1%81%D0%B8%D1%85%D0%B8%D0%B0%D1%82%D1%80%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F+%D0%B1%D0%BE%D0%BB%D1%8C%D0%BD%D0%B8%D1%86%D0%B0)
+	(role concrete)
+	(single-slot %D0%9D%D0%B0%D0%B8%D0%BC%D0%B5%D0%BD%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot %D0%9E%D1%82%D0%B2%D0%B5%D1%82%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D1%8B%D0%B9
+		(type INSTANCE)
+;+		(allowed-classes)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))

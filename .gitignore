@@ -2,7 +2,7 @@ venv/
 htmlcov/
 .pytest_cache/
 .coverage
-Python/__pycache__/
+**/__pycache__/
 Python/module_hierarchy
 Python/module_hierarchy.png
 Python/pic.svg
