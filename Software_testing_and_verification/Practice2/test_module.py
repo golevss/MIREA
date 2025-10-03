@@ -7,8 +7,11 @@ def test_validate_email():
     assert validate_email("a@b.c") == True
     assert validate_email("invalid.email") == False
     assert validate_email("user@") == False
+    assert validate_email("@") == False
+    assert validate_email("@a.com") == True
 
     assert isinstance(validate_email(123), TypeError)
+    assert str(validate_email(123)) == "String value expected"
 
 
 def test_get_range():
@@ -21,6 +24,9 @@ def test_get_range():
     assert isinstance(get_range("string"), TypeError)
 
     assert isinstance(get_range([1, 2, "3"]), TypeError)
+
+    assert str(get_range(123)) == "List value expected"
+    assert str(get_range(["str"])) == "List must consist from integer values expected"
 
 
 def test_only_even():
@@ -37,6 +43,9 @@ def test_only_even():
     assert isinstance(only_even("string"), TypeError)
     assert isinstance(only_even([1, "2"]), TypeError)
 
+    assert str(only_even(123)) == "List value expected"
+    assert str(only_even(["str"])) == "List must consist from integer values expected"
+
 
 def test_vector_multiplier():
     assert vector_multiplier([1, 2, 3], [4, 5, 6]) == [4, 10, 18]
@@ -49,6 +58,10 @@ def test_vector_multiplier():
     assert isinstance(vector_multiplier([1, "2"], [1, 2]), TypeError)
     assert isinstance(vector_multiplier([1, 2], [1, "2"]), TypeError)
 
+    assert str(vector_multiplier([1, 3], [4, 5, 6])) == "Vectors length must be equal"
+    assert str(vector_multiplier(["str"],["str"])) == "List must consist from integer values expected"
+    assert str(vector_multiplier(123)) == "List value expected"
+    assert str(vector_multiplier(["str"])) == "List must consist from integer values expected"
 
 def test_upper_case():
     assert upper_case("hello") == "HELLO"
