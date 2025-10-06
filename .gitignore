@@ -1,8 +1,10 @@
 venv/
+ub_venv/
 htmlcov/
 .pytest_cache/
 .coverage
 **/__pycache__/
+**/mutants/
 Python/module_hierarchy
 Python/module_hierarchy.png
 Python/pic.svg

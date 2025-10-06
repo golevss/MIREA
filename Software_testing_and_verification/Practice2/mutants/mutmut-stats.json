@@ -1,0 +1,27 @@
+{
+    "tests_by_mangled_function_name": {
+        "module.x_validate_email": [
+            "test_module.py::test_validate_email"
+        ],
+        "module.x_get_range": [
+            "test_module.py::test_get_range"
+        ],
+        "module.x_only_even": [
+            "test_module.py::test_only_even"
+        ],
+        "module.x_vector_multiplier": [
+            "test_module.py::test_vector_multiplier"
+        ],
+        "module.x_upper_case": [
+            "test_module.py::test_upper_case"
+        ]
+    },
+    "duration_by_test": {
+        "test_module.py::test_validate_email": 0.00016737499993269012,
+        "test_module.py::test_get_range": 0.00015404999999191205,
+        "test_module.py::test_only_even": 0.00014592499996979313,
+        "test_module.py::test_vector_multiplier": 0.00011039200001050631,
+        "test_module.py::test_upper_case": 0.00011190899999746762
+    },
+    "stats_time": 0.33786210000000005
+}
