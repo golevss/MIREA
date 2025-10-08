@@ -81,7 +81,7 @@ class Roi():
 if __name__ == '__main__':
     obj = Roi() 
     N = 5
-    max_iter = 50
+    max_iter = 100
 
     obj.create(N, -4.5, 4.5)
     

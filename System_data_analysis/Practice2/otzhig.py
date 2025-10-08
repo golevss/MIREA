@@ -46,7 +46,7 @@ def otzhigKoshi(T = 1,Tmin = 1e-1000, k=1):
                 yb = yi
         
         T /= k
-        k+=1
+        k+=0.5
 
     return xb, yb
 

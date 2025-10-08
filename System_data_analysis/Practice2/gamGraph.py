@@ -15,7 +15,7 @@ def createGraph(cNodes):
     
     return structure, step
 
-def findWay(cNodes, struct, step, T = 1,Tmin = 1e-1000, k = 1):
+def findWay(cNodes, struct, step, T = 1,Tmin = 1e-1000, alpha = 0.5):
     start = str(step)
     curr = start
     next_step = ''
@@ -74,8 +74,7 @@ def findWay(cNodes, struct, step, T = 1,Tmin = 1e-1000, k = 1):
         
         print(' -> '.join(pi))
         print('Вес:', wi)
-        T /= k
-        k += 1
+        T *= alpha
     return pb, wb 
 
 
