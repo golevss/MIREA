@@ -20,7 +20,7 @@ def aco_tsp(graph, startNode, num_ants=10, iterations=100, alpha=1):
     nodes = list(graph.keys())
     n = len(nodes)
     
-    tau = {i: {j: random.uniform(0.1, 1.0) for j, _ in graph[i]} for i in graph}
+    tau = {i: {j: np.random.uniform(0.1, 1.0) for j, _ in graph[i]} for i in graph}
     eta = {i: {j: 1 / w for j, w in graph[i]} for i in graph}
 
     best_length = float('inf')
