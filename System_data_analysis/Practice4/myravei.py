@@ -16,7 +16,7 @@ def createGraph(cNodes):
     
     return structure, step
 
-def aco_tsp(graph, num_ants=10, iterations=100, alpha=1):
+def aco_tsp(graph, startNode, num_ants=10, iterations=100, alpha=1):
     nodes = list(graph.keys())
     n = len(nodes)
     
@@ -31,7 +31,7 @@ def aco_tsp(graph, num_ants=10, iterations=100, alpha=1):
         lengths = []
 
         for _ in range(num_ants):
-            start = '1'
+            start = str(startNode)
             unvisited = set(nodes)
             unvisited.remove(start)
             path = [start]
@@ -87,8 +87,8 @@ def aco_tsp(graph, num_ants=10, iterations=100, alpha=1):
 
 if __name__ == '__main__':
     cNodes = 6
-    structure, _ = createGraph(cNodes)
+    structure, start = createGraph(cNodes)
 
-    path, weight = aco_tsp(structure, num_ants = cNodes)
+    path, weight = aco_tsp(structure, startNode=start, num_ants = cNodes)
     print("Кратчайший путь:", ' -> '.join(path))
     print("Длина:", weight) 
