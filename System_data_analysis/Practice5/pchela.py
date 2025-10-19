@@ -70,4 +70,4 @@ if __name__ == '__main__':
     iter = 1000
 
     best_bee = c.find_best(iter)
-    print(f"Результат x = {best_bee.x} y = {best_bee.y} f = {best_bee.f}")
+    print(f"Результат x = {best_bee.x:.5f} y = {best_bee.y:.5f} f = {best_bee.f:.5f}")
