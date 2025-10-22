@@ -86,6 +86,8 @@ class Troop:
                     monk.update()
                 else:
                     monk.make_global_jump(c_x, c_y)
+                    c_x = np.mean([m.x for m in monkeyz])
+                    c_y = np.mean([m.y for m in monkeyz])
 
         monkeyz.sort(key=lambda b: b.f)
         return monkeyz[0]

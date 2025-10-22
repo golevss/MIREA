@@ -23,19 +23,23 @@ class Bee():
 
 class Colony():
     def __init__(self):
-        self.scouts = 10
-        self.best = 5
+        self.scouts = 20
+        self.best = 7
         self.worst = 2
-        self.best_area = 2
+        self.best_area = 5
         self.worst_area = 1
-        self.inaccuracy = 5
+        self.inaccuracy = 1
 
-    def bee_atack(self, iter, minZ, maxZ):
+    def bee_atack(self, iter, minX, maxX, minY, maxY):
         beez = []
         for i in range (iter):
             bee = Bee()
-            bee.x = np.random.uniform(minZ, maxZ)
-            bee.y = np.random.uniform(minZ, maxZ)
+            bee.x = np.random.uniform(minX, maxX)
+            bee.y = np.random.uniform(minY, maxY)
+
+            bee.x = np.clip(bee.x, -4.5, 4.5)
+            bee.y = np.clip(bee.y, -4.5, 4.5)
+            
             bee.calc()
 
             beez.append(bee)
@@ -44,18 +48,20 @@ class Colony():
         return beez
 
     def find_best(self, iter):
-        beez = self.bee_atack(self.scouts, -4.5, 4.5)
+        beez = self.bee_atack(self.scouts, -4.5, 4.5, -4.5, 4.5)
         beez = beez[:self.best_area + self.worst_area]
 
         cur_beez = []
         for i in range(iter):
             for bee in range (self.best_area):
                 minX, maxX = beez[bee].calc_x_area(self.inaccuracy)
-                cur_beez += self.bee_atack(self.best, minX, maxX)
+                minY, maxY = beez[bee].calc_y_area(self.inaccuracy)
+                cur_beez += self.bee_atack(self.best, minX, maxX, minY, maxY)
 
             for bee in range (self.worst_area):
                 minX, maxX = beez[self.best_area + bee].calc_x_area(self.inaccuracy)
-                cur_beez += self.bee_atack(self.worst, minX, maxX)
+                minY, maxY = beez[self.best_area + bee].calc_y_area(self.inaccuracy)
+                cur_beez += self.bee_atack(self.worst, minX, maxX, minY, maxY)
 
             cur_beez.sort(key=lambda b: b.f)
             cur_beez = cur_beez[:self.best_area + self.worst_area]
