@@ -30,10 +30,7 @@ class Delta:
                 e = d - y
                 total_error += e
                 self.modification(x, e)
-                # print(f"{step} – {i}: Error={e}, w={self.w}, T={self.T}")
-            # print(f"{step}: avg_error={avg_error}")
             if total_error < self.err:
-                # print(f"Training stopped at step {step}")
                 break
             
 
