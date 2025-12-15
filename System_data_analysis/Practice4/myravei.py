@@ -1,5 +1,5 @@
 import numpy as np
-import random
+
 
 def createGraph(cNodes):    
     structure = {}
@@ -8,86 +8,105 @@ def createGraph(cNodes):
         structure[str(i + step)] = [] 
 
     for i in range (cNodes):
-        for j in range (i + 1,cNodes):
-            w = np.random.randint(1, 6)
+        for j in range(i + 1, cNodes):
+            w = np.random.randint(1, 10)
 
             structure[str(i + step)].append((str(j + step), w))
             structure[str(j + step)].append((str(i + step), w))
     
     return structure, step
 
-def aco_tsp(graph, startNode, num_ants=6, iterations=100, alpha=1):
-    nodes = list(graph.keys())
+
+def ant_colony_tsp(structure, n_ants=5, n_iterations=50, alpha=1.0, q=5.0, rho=0.5, Q=100.0, seed=123):
+
+    rng = np.random.default_rng(seed)
+
+    nodes = sorted(structure.keys(), key=lambda x: int(x))
     n = len(nodes)
-    
-    tau = {i: {j: np.random.uniform(0.1, 1.0) for j, _ in graph[i]} for i in graph}
+    node_index = {node: idx for idx, node in enumerate(nodes)}
 
-    best_length = float('inf')
+    dist = np.full((n, n), np.inf, dtype=float)
+    for u in nodes:
+        i = node_index[u]
+        for v, w in structure[u]:
+            j = node_index[v]
+            dist[i, j] = w
+            dist[j, i] = w 
+
+    l = np.zeros_like(dist)
+    finite_mask = np.isfinite(dist)
+    l[finite_mask] = 1.0 / dist[finite_mask]
+
+    tau = np.ones((n, n), dtype=float)
+
     best_path = None
+    best_length = np.inf
 
-    for t in range(iterations):
-        paths = []
-        lengths = []
+    for it in range(n_iterations):
+        all_paths = []
+        all_lengths = []
 
-        for _ in range(num_ants):
-            start = str(startNode)
-            unvisited = set(nodes)
-            unvisited.remove(start)
-            path = [start]
-            total_dist = 0
+        for ant in range(n_ants):
+            start = 0
             current = start
+            visited = {current}
+            path = [current]
 
-            while unvisited:
-                neighbors = [n for n, _ in graph[current] if n in unvisited]
-                if not neighbors:
-                    break
+            while len(visited) < n:
+                neighbors = [j for j in range(n) if j not in visited]
 
-                probs = []
-                denom = sum((tau[current][j] ** alpha) for j in neighbors)
-                for j in neighbors:
-                    p = (tau[current][j] ** alpha) / denom
-                    probs.append(p)
+                tau_curr = tau[current, neighbors]
+                l_curr = l[current, neighbors]
 
-                next_node = random.choices(neighbors, weights=probs, k=1)[0]
-                dist = next(w for wj, w in graph[current] if wj == next_node)
-                total_dist += dist
-                path.append(next_node)
-                unvisited.remove(next_node)
-                current = next_node
+                weights = (tau_curr ** alpha) * (l_curr ** q)
 
+                if weights.sum() == 0:
+                    probs = np.ones_like(weights) / len(weights)
+                else:
+                    probs = weights / weights.sum()
 
-            if len(path) == n:
-                last, first = path[-1], path[0]
-                dist = next(w for wj, w in graph[last] if wj == first)
-                total_dist += dist
-                path.append(first)
+                next_idx = rng.choice(len(neighbors), p=probs)
+                next_vertex = neighbors[next_idx]
 
-            print(' -> '.join(path))
-            # print(total_dist)
+                path.append(next_vertex)
+                visited.add(next_vertex)
+                current = next_vertex
 
-            paths.append(path)
-            lengths.append(total_dist)
+            path.append(start)
 
-            if total_dist < best_length:
-                best_length = total_dist
+            length = 0.0
+            for i in range(len(path) - 1):
+                length += dist[path[i], path[i + 1]]
+
+            all_paths.append(path)
+            all_lengths.append(length)
+
+            print(f"{path} | {length}")
+            if length < best_length:
+                best_length = length
                 best_path = path
-
-
-        for k in range(num_ants):
-            path = paths[k]
-            length = lengths[k]
+        print()
+        tau *= (1.0 - rho)
+        for path, length in zip(all_paths, all_lengths):
+            if length == 0:
+                continue
+            delta = Q / length
             for i in range(len(path) - 1):
                 a, b = path[i], path[i + 1]
-                tau[a][b] += 1 / length
-                tau[b][a] += 1 / length
+                tau[a, b] += delta
+                tau[b, a] += delta
 
-    return best_path, best_length
+        # print(f"{best_path} | {best_length}")
+
+    best_path_nodes = [nodes[i] for i in best_path]
+    return best_path_nodes, best_length
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     cNodes = 6
     structure, start = createGraph(cNodes)
 
-    path, weight = aco_tsp(structure, startNode=start, num_ants = cNodes)
-    print("Кратчайший путь:", ' -> '.join(path))
-    print("Длина:", weight) 
+    best_path, best_length = ant_colony_tsp(structure, n_ants=6, n_iterations=100)
+
+    print("Лучший путь:", best_path)
+    print("Длина:", best_length)
