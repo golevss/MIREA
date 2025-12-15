@@ -1,4 +1,5 @@
 import numpy as np
+import datetime
 
 def f(x, y):
     return (1.5 - x + x*y)**2 + (2.25 - x + x*(y**2))**2 + (2.625 - x + x*(y**3))**2
@@ -89,9 +90,13 @@ if __name__ == '__main__':
     obj.print()
     print(obj.glob_best)
 
+    start = datetime.datetime.now()
     while obj.iteration != max_iter:
         obj.make_iter(N)
+    end = datetime.datetime.now()
 
     print("\n==Конечные позиции роя==")
     obj.print()
     print(obj.glob_best)
+
+    print(end - start)

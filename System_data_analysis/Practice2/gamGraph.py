@@ -1,5 +1,5 @@
 import numpy as np
-
+import datetime 
 def createGraph(cNodes):    
     structure = {}
     step = 1
@@ -81,8 +81,10 @@ def findWay(cNodes, struct, step, T = 1,Tmin = 1e-1000, alpha = 0.5):
 cNodes = 6
 structure, step = createGraph(cNodes)
 # print(structure)    
-
+start = datetime.datetime.now()
 path, weight = findWay(cNodes, structure, step)
+end = datetime.datetime.now()
+print(end - start)
 print('\nКратчайший путь:')
 print(' -> '.join(path))
 print('Вес:', weight)

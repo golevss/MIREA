@@ -1,4 +1,5 @@
 import numpy as np
+import datetime
 
 def f(x, y):
     return (1.5 - x + x*y)**2 + (2.25 - x + x*(y**2))**2 + (2.625 - x + x*(y**3))**2
@@ -30,7 +31,10 @@ def otzhigKoshi(T = 1,Tmin = 1e-1000, k=1):
     xb = np.random.uniform(-4.5, 4.5)
     yb = np.random.uniform(-4.5, 4.5)
 
+    cou = 0
     while (T > Tmin):
+        cou+=1
+        print(cou)
         xi = np.random.uniform(-4.5, 4.5)
         yi = np.random.uniform(-4.5, 4.5)
         
@@ -57,6 +61,10 @@ print(xb, yb)
 print(f(xb, yb))
 
 print("Отжиг Коши")
+start = datetime.datetime.now()
 xb, yb = otzhigKoshi()
+end = datetime.datetime.now()
+
 print(xb, yb)
 print(f(xb, yb))
+print(end - start)

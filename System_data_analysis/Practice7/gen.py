@@ -1,4 +1,5 @@
 import numpy as np
+import datetime
 
 def f(x, y):
     return (1.5 - x + x*y)**2 + (2.25 - x + x*(y**2))**2 + (2.625 - x + x*(y**3))**2
@@ -6,7 +7,7 @@ def f(x, y):
 
 def genetic_minimize_beale(
         pop_size=50,
-        n_generations=300,
+        n_generations=100,
         x_bounds=(-4.5, 4.5),
         y_bounds=(-4.5, 4.5),
         pc=0.8,
@@ -87,5 +88,8 @@ def genetic_minimize_beale(
 
 
 if __name__ == "__main__":
+    start = datetime.datetime.now()
     x_opt, y_opt, f_opt = genetic_minimize_beale()
+    end = datetime.datetime.now()
+    print(end - start)
     print(f"Результат x = {x_opt:.5f} y = {y_opt:.5f} f = {f_opt:.8f}")

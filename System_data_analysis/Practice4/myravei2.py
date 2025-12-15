@@ -1,6 +1,6 @@
 import numpy as np
 import random
-
+import datetime
 
 class AntAlg:
     def __init__(self, distances: np.ndarray, n_ants, n_iterations, alpha, beta, rho, q):
@@ -114,9 +114,11 @@ if __name__ == "__main__":
         [25, 30, 10, 15, 0]
     ])
 
+    start = datetime.datetime.now()
     aa = AntAlg(distances, 6, 50, 1, 2, 0.5, 100)
 
     best_path, best_length = aa.run()
-
+    end = datetime.datetime.now()
     print(f"Лучшая длина маршрута: {best_length:.2f}")
-    print(f"Лучший маршрут: {best_path + [1]}")
+    print(f"Лучший маршрут: {best_path + [1]}") 
+    print(end - start)

@@ -1,5 +1,5 @@
 import numpy as np
-
+import datetime
 
 def f(x, y):
     return (1.5 - x + x*y)**2 + (2.25 - x + x*(y**2))**2 + (2.625 - x + x*(y**3))**2
@@ -98,6 +98,8 @@ if __name__ == '__main__':
 
     troop = Troop()
     iter = 100
-
+    start = datetime.datetime.now()
     best_monkey = troop.find_best(iter)
+    end = datetime.datetime.now()
+    print(end - start)
     print(f"Результат x = {best_monkey.x:.5f} y = {best_monkey.y:.5f} f = {best_monkey.f:.8f}")

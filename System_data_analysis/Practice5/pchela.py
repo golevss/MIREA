@@ -1,5 +1,5 @@
 import numpy as np
-
+import datetime
 
 def f(x, y):
     return (1.5 - x + x*y)**2 + (2.25 - x + x*(y**2))**2 + (2.625 - x + x*(y**3))**2
@@ -73,7 +73,9 @@ if __name__ == '__main__':
     print("Эталон: f(3, 0.5) = 0")
 
     c = Colony()
-    iter = 1000
-
+    iter = 100
+    start = datetime.datetime.now()
     best_bee = c.find_best(iter)
+    end = datetime.datetime.now()
+    print(end - start)
     print(f"Результат x = {best_bee.x:.5f} y = {best_bee.y:.5f} f = {best_bee.f:.5f}")
