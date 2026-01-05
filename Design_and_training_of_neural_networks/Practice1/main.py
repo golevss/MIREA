@@ -37,7 +37,6 @@ if __name__ == "__main__":
     D = np.array([-1, -1, -1, 1])
 
     neuron = Rosenblatt(n_inputs=2)
-    print(f"Вес w = {neuron.w}, порог T = {neuron.T}")
 
     neuron.train(X, D)
     print(f"Вес w = {neuron.w}, порог T = {neuron.T}")
